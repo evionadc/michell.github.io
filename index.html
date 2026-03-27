@@ -3,22 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apresentações de Michell</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; color: #333; margin: 0; padding: 20px; }
-        h1 { text-align: center; }
-        ul { list-style: none; padding: 0; }
-        li { margin: 10px 0; }
-        a { text-decoration: none; color: #007bff; }
-        a:hover { text-decoration: underline; }
-    </style>
+    <title>Michell | Palestras e Apresentações</title>
+    <meta
+        name="description"
+        content="Site pessoal de Michell com apresentações sobre aprendizado, desenvolvimento guiado por especificações e squads híbridas."
+    >
+    <link rel="stylesheet" href="site.css">
 </head>
 <body>
-    <h1>Apresentações de Michell</h1>
-    <ul>
-        <li><a href="apresentacao-aprendizado.html">Como aprendemos e como AI auxilia no aprendizado</a></li>
-        <li><a href="apresentacao-spec.html">Spec Development Driven</a></li>
-        <li><a href="apresentacao-squads.html">Squads híbridas (Humanos e AI)</a></li>
-    </ul>
+    <div class="page-shell">
+        <header class="hero">
+            <div class="hero-copy">
+                <p class="eyebrow">Michell · Talks & Slides</p>
+                <h1>Um hub pessoal para palestras sobre produto, aprendizado e colaboração com AI.</h1>
+                <p class="hero-text">
+                    Este site reúne decks pensados para palco, workshop e compartilhamento assíncrono.
+                    A ideia é manter uma identidade forte, com apresentações prontas para evoluir
+                    conforme o conteúdo for sendo refinado.
+                </p>
+                <div class="hero-actions">
+                    <a class="button button-primary" href="#palestras">Ver palestras</a>
+                    <a class="button button-secondary" href="#processo">Como estou organizando</a>
+                </div>
+            </div>
+            <aside class="hero-panel" aria-label="Resumo do catálogo">
+                <p class="panel-label">Catálogo inicial</p>
+                <div class="metric">
+                    <strong>3</strong>
+                    <span>temas inaugurais</span>
+                </div>
+                <div class="metric">
+                    <strong>1</strong>
+                    <span>linguagem visual compartilhada</span>
+                </div>
+                <div class="metric">
+                    <strong>100%</strong>
+                    <span>compatível com GitHub Pages</span>
+                </div>
+            </aside>
+        </header>
+
+        <main>
+            <section class="section-intro" id="palestras">
+                <div>
+                    <p class="section-kicker">Palestras em destaque</p>
+                    <h2>Uma coleção inicial de talks para tecnologia, times e formas de aprender melhor.</h2>
+                </div>
+                <p class="section-text">
+                    Cada card abaixo leva para um deck Reveal.js com estrutura pronta para receber
+                    conteúdo final, exemplos, narrativas e fechamento.
+                </p>
+            </section>
+
+            <section class="talk-grid">
+                <article class="talk-card accent-learning">
+                    <p class="talk-type">Aprendizado & AI</p>
+                    <h3>Como aprendemos e como AI auxilia no aprendizado</h3>
+                    <p>
+                        Uma apresentação sobre modelos mentais, feedback, repetição e o papel da AI
+                        como amplificador de curiosidade e prática.
+                    </p>
+                    <ul class="tag-row" aria-label="Metadados da palestra">
+                        <li>Keynote</li>
+                        <li>EduTech</li>
+                        <li>Workshop</li>
+                    </ul>
+                    <a class="card-link" href="apresentacao-aprendizado.html">Abrir deck</a>
+                </article>
+
+                <article class="talk-card accent-spec">
+                    <p class="talk-type">Engineering Practice</p>
+                    <h3>Spec Development Driven</h3>
+                    <p>
+                        Uma narrativa sobre especificações como artefato vivo para alinhar contexto,
+                        clareza de requisitos e execução assistida por AI.
+                    </p>
+                    <ul class="tag-row" aria-label="Metadados da palestra">
+                        <li>Produto</li>
+                        <li>Fluxo de trabalho</li>
+                        <li>Escala</li>
+                    </ul>
+                    <a class="card-link" href="apresentacao-spec.html">Abrir deck</a>
+                </article>
+
+                <article class="talk-card accent-squads">
+                    <p class="talk-type">Times híbridos</p>
+                    <h3>Squads híbridas (Humanos e AI)</h3>
+                    <p>
+                        Uma provocação sobre colaboração, papéis, governança e novas formas de operar
+                        com pessoas e agentes no mesmo fluxo de entrega.
+                    </p>
+                    <ul class="tag-row" aria-label="Metadados da palestra">
+                        <li>Liderança</li>
+                        <li>Operação</li>
+                        <li>Cultura</li>
+                    </ul>
+                    <a class="card-link" href="apresentacao-squads.html">Abrir deck</a>
+                </article>
+            </section>
+
+            <section class="process-section" id="processo">
+                <div class="process-card">
+                    <p class="section-kicker">Direção de design</p>
+                    <h2>Editorial na home. Energia visual nos slides. Estrutura clara para evoluir o conteúdo.</h2>
+                </div>
+                <div class="process-list">
+                    <article>
+                        <h3>Home como vitrine</h3>
+                        <p>
+                            A página inicial funciona como um portfólio vivo, apresentando os temas e
+                            ajudando a escolher rapidamente qual deck abrir.
+                        </p>
+                    </article>
+                    <article>
+                        <h3>Decks como templates premium</h3>
+                        <p>
+                            Cada apresentação já vem com abertura, blocos de argumento, áreas para
+                            exemplos e slide final, prontos para receber sua narrativa.
+                        </p>
+                    </article>
+                    <article>
+                        <h3>Publicação sem fricção</h3>
+                        <p>
+                            Tudo continua em HTML/CSS/JS estático, o que facilita manutenção, versionamento
+                            e deploy direto no GitHub Pages.
+                        </p>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </div>
 </body>
 </html>

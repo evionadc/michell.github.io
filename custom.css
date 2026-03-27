@@ -1,0 +1,13 @@
+.reveal {
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    color: #333333;
+}
+
+.reveal h1, .reveal h2, .reveal h3 {
+    color: #000000;
+}
+
+.reveal p, .reveal li {
+    color: #333333;
+}

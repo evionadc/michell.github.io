@@ -2,3 +2,6 @@
 .specify/*
 !.specify/memory/
 !.specify/memory/constitution.md
+reveal/*
+!reveal/dist/
+!reveal/dist/**

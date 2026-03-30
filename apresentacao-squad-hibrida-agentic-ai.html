@@ -1,0 +1,1776 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Squads híbridas - Modelo de trabalho Agentic AI</title>
+    <link rel="stylesheet" href="reveal/dist/reset.css">
+    <link rel="stylesheet" href="reveal/dist/reveal.css">
+    <style>
+        :root {
+            --bg-base: #3b1f0f;
+            --bg-deep: #004b8d;
+            --panel: rgba(18, 31, 58, 0.8);
+            --panel-strong: rgba(22, 39, 72, 0.9);
+            --border: rgba(255, 98, 0, 0.28);
+            --text: #f7f8fc;
+            --text-soft: rgba(247, 248, 252, 0.8);
+            --accent: #ff6200;
+            --accent-strong: #ffb26b;
+            --shadow: 0 28px 90px rgba(0, 0, 0, 0.33);
+            --deck-max-width: 1160px;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        .reveal {
+            width: 100vw;
+            height: 100vh;
+            font-family: "Aptos", "Segoe UI", sans-serif;
+            color: var(--text);
+        }
+
+        .reveal .backgrounds {
+            background:
+                radial-gradient(circle at top left, rgba(255, 98, 0, 0.28), transparent 26%),
+                radial-gradient(circle at 78% 18%, rgba(255, 157, 64, 0.18), transparent 22%),
+                radial-gradient(circle at bottom right, rgba(0, 75, 141, 0.16), transparent 30%),
+                linear-gradient(180deg, #fbf1e7 0%, #eef1f7 100%);
+        }
+
+        .reveal .slides {
+            width: 100%;
+            height: 100%;
+            text-align: left;
+        }
+
+        .reveal .slides section {
+            display: flex !important;
+            align-items: stretch;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 36px 40px 44px;
+            box-sizing: border-box;
+            background: transparent;
+        }
+
+        .reveal h1,
+        .reveal h2,
+        .reveal h3 {
+            margin: 0 0 16px;
+            color: var(--text);
+            font-family: Georgia, "Times New Roman", serif;
+            line-height: 1.04;
+            text-transform: none;
+        }
+
+        .reveal h1 {
+            font-size: clamp(2.8rem, 5vw, 3.8rem);
+        }
+
+        .reveal h2 {
+            font-size: clamp(2rem, 3.4vw, 2.5rem);
+        }
+
+        .reveal h3 {
+            font-size: clamp(1.02rem, 1.7vw, 1.28rem);
+        }
+
+        .reveal p,
+        .reveal li {
+            color: var(--text-soft);
+            font-size: clamp(0.92rem, 1.25vw, 1.04rem);
+            line-height: 1.52;
+        }
+
+        .slide-shell,
+        .hero-grid,
+        .split-grid,
+        .motives-grid,
+        .levers-grid,
+        .team-grid,
+        .team-points,
+        .sdd-grid,
+        .sdd-list,
+        .sdd-timeline,
+        .menu-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .deck-menu-button {
+            position: fixed;
+            top: 18px;
+            right: 22px;
+            z-index: 30;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 16px;
+            border: 1px solid rgba(255, 98, 0, 0.34);
+            border-radius: 999px;
+            background: rgba(8, 30, 73, 0.88);
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+            transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
+        }
+
+        .deck-menu-button:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 98, 0, 0.68);
+            background: rgba(0, 59, 142, 0.96);
+        }
+
+        .deck-menu-button:focus-visible {
+            outline: 2px solid rgba(255, 98, 0, 0.96);
+            outline-offset: 3px;
+            border-color: rgba(255, 98, 0, 0.8);
+        }
+
+        .slide-shell {
+            width: min(100%, var(--deck-max-width));
+            height: 100%;
+            min-height: 0;
+            align-content: start;
+            margin: 0 auto;
+            padding: 32px;
+            max-height: none;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            border-radius: 34px;
+            background:
+                radial-gradient(circle at top right, rgba(255, 98, 0, 0.2), transparent 26%),
+                radial-gradient(circle at left 18%, rgba(255, 179, 107, 0.16), transparent 24%),
+                radial-gradient(circle at bottom left, rgba(92, 139, 214, 0.14), transparent 28%),
+                linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-base) 100%);
+            box-shadow: var(--shadow);
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 98, 0, 0.45) rgba(255, 255, 255, 0.05);
+        }
+
+        .slide-shell::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .slide-shell::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 999px;
+        }
+
+        .slide-shell::-webkit-scrollbar-thumb {
+            background: rgba(255, 98, 0, 0.38);
+            border-radius: 999px;
+            border: 2px solid rgba(7, 17, 26, 0.12);
+        }
+
+        .slide-shell::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 98, 0, 0.54);
+        }
+
+        .slide-shell > * {
+            min-width: 0;
+        }
+
+        .hero-panel,
+        .content-panel,
+        .motive-card,
+        .lever-card,
+        .hero-side,
+        .team-card {
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            background: var(--panel);
+            backdrop-filter: blur(14px);
+        }
+
+        .hero-panel,
+        .content-panel {
+            padding: 28px;
+        }
+
+        .hero-panel {
+            position: relative;
+            overflow: hidden;
+            animation: heroFade 900ms ease both;
+        }
+
+        .hero-panel::after {
+            content: "";
+            position: absolute;
+            right: -4%;
+            bottom: -20%;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 98, 0, 0.2), transparent 70%);
+            pointer-events: none;
+        }
+
+        .eyebrow {
+            margin: 0 0 12px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+
+        .hero-grid {
+            grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+            align-items: end;
+        }
+
+        .hero-title {
+            max-width: 11ch;
+        }
+
+        .hero-subtitle {
+            max-width: 28ch;
+            margin-bottom: 0;
+            color: var(--text);
+            font-size: clamp(1.04rem, 1.8vw, 1.34rem) !important;
+            line-height: 1.34 !important;
+        }
+
+        .hero-side {
+            padding: 20px;
+            background: linear-gradient(180deg, rgba(255, 98, 0, 0.18), rgba(255, 179, 107, 0.08));
+        }
+
+        .hero-side strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text);
+            font-size: 1rem;
+        }
+
+        .split-grid,
+        .team-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: stretch;
+        }
+
+        .motives-grid {
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+        }
+
+        .levers-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .motive-card,
+        .lever-card {
+            min-height: 152px;
+            padding: 20px;
+            background: var(--panel-strong);
+            transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease, background-color 220ms ease;
+        }
+
+        .motive-card:hover,
+        .lever-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 98, 0, 0.42);
+            background: rgba(8, 39, 97, 0.98);
+            box-shadow: 0 18px 42px rgba(0, 0, 0, 0.22);
+        }
+
+        .card-number {
+            display: inline-flex;
+            margin-bottom: 12px;
+            color: var(--accent-strong);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+        }
+
+        .motive-card p,
+        .lever-card p,
+        .hero-side p,
+        .team-point p {
+            margin: 0;
+        }
+
+        .center-intro {
+            max-width: 880px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .center-intro .hero-subtitle {
+            max-width: none;
+        }
+
+        .menu-slide .slide-shell {
+            gap: 24px;
+        }
+
+        .menu-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: stretch;
+        }
+
+        .menu-link {
+            display: block;
+            padding: 22px 24px;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            background: linear-gradient(180deg, rgba(18, 38, 74, 0.96), rgba(43, 27, 24, 0.92));
+            color: inherit;
+            text-decoration: none;
+            transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+        }
+
+        .menu-link:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 98, 0, 0.48);
+            box-shadow: 0 18px 42px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-link:focus-visible {
+            outline: 2px solid rgba(255, 98, 0, 0.96);
+            outline-offset: 4px;
+            border-color: rgba(255, 98, 0, 0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 18px 42px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-link strong {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--text);
+            font-size: 1.18rem;
+            font-family: Georgia, "Times New Roman", serif;
+            font-weight: 700;
+        }
+
+        .menu-link span {
+            display: block;
+            color: var(--text-soft);
+            line-height: 1.45;
+        }
+
+        .team-card {
+            padding: 24px;
+            background: linear-gradient(180deg, rgba(16, 37, 72, 0.96), rgba(44, 28, 25, 0.92));
+        }
+
+        .team-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .team-card > p {
+            margin-top: 0;
+        }
+
+        .team-points {
+            margin-top: 18px;
+            gap: 12px;
+        }
+
+        .team-point {
+            display: grid;
+            grid-template-columns: 22px minmax(0, 1fr);
+            gap: 12px;
+            align-items: start;
+            padding: 14px 0 0;
+            border-top: 1px solid rgba(239, 246, 242, 0.08);
+        }
+
+        .team-point span {
+            color: var(--accent-strong);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+        }
+
+        .team-callout {
+            padding: 22px 26px;
+            border: 1px solid rgba(255, 98, 0, 0.22);
+            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(255, 98, 0, 0.14), rgba(92, 139, 214, 0.08));
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+        }
+
+        .team-callout p {
+            margin: 0;
+            color: var(--text);
+            font-size: 1.08rem;
+            line-height: 1.5;
+        }
+
+        .levers-slide .content-panel {
+            padding: 24px;
+        }
+
+        .levers-slide h2 {
+            font-size: clamp(1.7rem, 2.9vw, 2.18rem);
+        }
+
+        .levers-slide .levers-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .levers-slide .lever-card {
+            min-height: 124px;
+            padding: 18px;
+        }
+
+        .levers-slide .lever-card p {
+            font-size: 0.96rem;
+            line-height: 1.42;
+        }
+
+        .team-slide .slide-shell {
+            gap: 14px;
+            padding: 24px;
+        }
+
+        .team-slide .content-panel.center-intro {
+            padding: 20px 22px;
+        }
+
+        .team-slide h2 {
+            font-size: 2.02rem;
+        }
+
+        .team-slide .hero-subtitle {
+            font-size: 1.08rem !important;
+        }
+
+        .team-slide .team-card {
+            padding: 18px;
+        }
+
+        .team-slide .team-card h3 {
+            font-size: 0.96rem;
+            line-height: 1.15;
+        }
+
+        .team-slide .team-card > p {
+            font-size: 0.9rem;
+            line-height: 1.38;
+        }
+
+        .team-slide .team-points {
+            margin-top: 12px;
+            gap: 6px;
+        }
+
+        .team-slide .team-point {
+            padding-top: 8px;
+        }
+
+        .team-slide .team-point p {
+            font-size: 0.88rem;
+            line-height: 1.28;
+        }
+
+        .team-inline-callout {
+            margin-top: 14px;
+            padding: 14px 16px;
+            border: 1px solid rgba(255, 98, 0, 0.22);
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(255, 98, 0, 0.12), rgba(92, 139, 214, 0.06));
+        }
+
+        .team-inline-callout p {
+            margin: 0;
+            color: var(--text);
+            font-size: 0.92rem;
+            line-height: 1.32;
+        }
+
+        .sdd-slide .slide-shell {
+            gap: 18px;
+            padding: 28px;
+        }
+
+        .compare-slide .slide-shell {
+            gap: 20px;
+        }
+
+        .compare-slide .content-panel {
+            padding: 24px;
+        }
+
+        .compare-slide .hero-subtitle {
+            max-width: 34ch;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .comparison-board {
+            display: grid;
+            grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+            gap: 18px;
+            align-items: start;
+        }
+
+        .comparison-column {
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 22px;
+            background: linear-gradient(180deg, rgba(18, 38, 74, 0.96), rgba(40, 27, 26, 0.92));
+        }
+
+        .comparison-column h3 {
+            margin-bottom: 16px;
+        }
+
+        .comparison-column.is-hybrid {
+            border-color: rgba(255, 98, 0, 0.34);
+            background:
+                radial-gradient(circle at top right, rgba(255, 98, 0, 0.22), transparent 28%),
+                radial-gradient(circle at bottom left, rgba(255, 179, 107, 0.12), transparent 24%),
+                linear-gradient(180deg, rgba(8, 56, 121, 0.98), rgba(62, 31, 18, 0.94));
+            box-shadow: 0 22px 44px rgba(255, 98, 0, 0.08);
+        }
+
+        .comparison-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: minmax(110px, 0.42fr) minmax(0, 1fr);
+            gap: 12px;
+            align-items: start;
+            padding-top: 12px;
+            border-top: 1px solid rgba(239, 246, 242, 0.08);
+        }
+
+        .comparison-row:first-child {
+            border-top: 0;
+            padding-top: 0;
+        }
+
+        .comparison-label {
+            color: var(--accent-strong);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .comparison-row p {
+            margin: 0;
+        }
+
+        .compare-skills {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .skill-card {
+            min-height: 122px;
+            padding: 18px;
+            border: 1px solid rgba(255, 98, 0, 0.18);
+            border-radius: 22px;
+            background: linear-gradient(180deg, rgba(11, 53, 113, 0.96), rgba(59, 32, 22, 0.92));
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 98, 0, 0.42);
+            box-shadow: 0 18px 38px rgba(255, 98, 0, 0.08);
+        }
+
+        .skill-card p {
+            margin: 0;
+            color: var(--text);
+            line-height: 1.4;
+        }
+
+        .metrics-slide .slide-shell {
+            gap: 20px;
+        }
+
+        .metrics-highlight {
+            display: grid;
+            grid-template-columns: minmax(210px, 0.72fr) minmax(0, 1.28fr);
+            gap: 18px;
+            align-items: stretch;
+        }
+
+        .metric-number-card,
+        .metric-case-card,
+        .metric-tile {
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            background: linear-gradient(180deg, rgba(15, 33, 47, 0.96), rgba(11, 26, 37, 0.92));
+        }
+
+        .metric-number-card {
+            display: grid;
+            align-content: center;
+            justify-items: center;
+            min-height: 220px;
+            padding: 26px;
+            text-align: center;
+            border-color: rgba(255, 98, 0, 0.3);
+            background:
+                radial-gradient(circle at top, rgba(255, 98, 0, 0.24), transparent 34%),
+                radial-gradient(circle at bottom left, rgba(255, 179, 107, 0.12), transparent 24%),
+                linear-gradient(180deg, rgba(14, 61, 128, 0.98), rgba(68, 34, 20, 0.94));
+            box-shadow: 0 22px 46px rgba(255, 98, 0, 0.08);
+        }
+
+        .metric-number {
+            margin: 0;
+            color: var(--text);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(4rem, 10vw, 6.4rem);
+            line-height: 0.95;
+        }
+
+        .metric-number-caption {
+            margin: 10px 0 0;
+            color: var(--accent-strong);
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .metric-case-card {
+            padding: 24px;
+        }
+
+        .metric-case-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .metric-case-card > p {
+            margin-top: 0;
+        }
+
+        .metric-bullets {
+            display: grid;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .metric-bullet {
+            display: grid;
+            grid-template-columns: 18px minmax(0, 1fr);
+            gap: 10px;
+            align-items: start;
+            padding-top: 10px;
+            border-top: 1px solid rgba(239, 246, 242, 0.08);
+        }
+
+        .metric-bullet:first-child {
+            padding-top: 0;
+            border-top: 0;
+        }
+
+        .metric-bullet span {
+            color: var(--accent-strong);
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+        .metric-bullet p {
+            margin: 0;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .metric-tile {
+            min-height: 138px;
+            padding: 18px;
+            transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+        }
+
+        .metric-tile:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 98, 0, 0.4);
+            box-shadow: 0 18px 38px rgba(255, 98, 0, 0.08);
+        }
+
+        .metric-tile strong {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--text);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.08rem;
+        }
+
+        .metric-tile p {
+            margin: 0;
+        }
+
+        .measurement-panel {
+            padding: 20px 22px;
+            border: 1px solid rgba(255, 98, 0, 0.24);
+            border-radius: 26px;
+            background: linear-gradient(135deg, rgba(255, 98, 0, 0.14), rgba(92, 139, 214, 0.08));
+            box-shadow: 0 18px 38px rgba(255, 98, 0, 0.06);
+        }
+
+        .measurement-items {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .measurement-item {
+            padding-top: 10px;
+            border-top: 1px solid rgba(247, 248, 252, 0.12);
+        }
+
+        .measurement-item:first-child {
+            border-top: 0;
+            padding-top: 0;
+        }
+
+        .measurement-item strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text);
+            font-size: 0.98rem;
+        }
+
+        .measurement-item p {
+            margin: 0;
+        }
+
+        .roadmap-slide .slide-shell {
+            gap: 20px;
+        }
+
+        .roadmap-cycle {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .cycle-step {
+            min-height: 148px;
+            padding: 18px;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            background: linear-gradient(180deg, rgba(15, 47, 97, 0.96), rgba(58, 33, 24, 0.9));
+            transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+        }
+
+        .cycle-step:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 98, 0, 0.4);
+            box-shadow: 0 18px 36px rgba(255, 98, 0, 0.08);
+        }
+
+        .cycle-step strong {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--accent-strong);
+            font-size: 0.84rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .cycle-step p {
+            margin: 0;
+            color: var(--text);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.18rem;
+            line-height: 1.2;
+        }
+
+        .roadmap-timeline {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .release-card {
+            padding: 22px;
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            background: linear-gradient(180deg, rgba(17, 39, 76, 0.96), rgba(41, 27, 26, 0.92));
+        }
+
+        .release-card.is-next {
+            border-color: rgba(255, 98, 0, 0.34);
+            background:
+                radial-gradient(circle at top right, rgba(255, 98, 0, 0.16), transparent 28%),
+                linear-gradient(180deg, rgba(9, 60, 128, 0.96), rgba(62, 31, 18, 0.92));
+        }
+
+        .release-header {
+            display: grid;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .release-badge {
+            display: inline-flex;
+            width: fit-content;
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: rgba(255, 98, 0, 0.12);
+            color: var(--accent-strong);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .release-card h3 {
+            margin-bottom: 0;
+        }
+
+        .release-focus {
+            color: var(--text);
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .release-group {
+            margin-top: 16px;
+        }
+
+        .release-group strong {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--accent-strong);
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .release-actions {
+            display: grid;
+            gap: 10px;
+        }
+
+        .release-action {
+            display: grid;
+            grid-template-columns: 18px minmax(0, 1fr);
+            gap: 10px;
+            align-items: start;
+            padding-top: 10px;
+            border-top: 1px solid rgba(239, 246, 242, 0.08);
+        }
+
+        .release-action:first-child {
+            padding-top: 0;
+            border-top: 0;
+        }
+
+        .release-action span {
+            color: var(--accent-strong);
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+        .release-action p,
+        .release-result {
+            margin: 0;
+        }
+
+        .sdd-slide h2 {
+            font-size: clamp(1.76rem, 3vw, 2.32rem);
+        }
+
+        .sdd-grid {
+            grid-template-columns: 1.15fr 0.85fr;
+            align-items: start;
+        }
+
+        .sdd-definition,
+        .sdd-application,
+        .sdd-callout {
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            background: linear-gradient(180deg, rgba(17, 39, 76, 0.96), rgba(41, 27, 26, 0.92));
+            backdrop-filter: blur(14px);
+        }
+
+        .sdd-definition,
+        .sdd-application {
+            padding: 24px;
+        }
+
+        .sdd-definition h3,
+        .sdd-application h3 {
+            margin-bottom: 12px;
+        }
+
+        .sdd-list {
+            gap: 10px;
+        }
+
+        .sdd-item {
+            display: grid;
+            grid-template-columns: 22px minmax(0, 1fr);
+            gap: 12px;
+            align-items: start;
+            padding: 12px 0 0;
+            border-top: 1px solid rgba(239, 246, 242, 0.08);
+        }
+
+        .sdd-item span,
+        .timeline-step span {
+            color: var(--accent-strong);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+        }
+
+        .sdd-item p,
+        .timeline-step p {
+            margin: 0;
+        }
+
+        .sdd-timeline {
+            gap: 0;
+        }
+
+        .timeline-step {
+            display: grid;
+            grid-template-columns: 36px minmax(0, 1fr);
+            gap: 14px;
+            align-items: start;
+            padding: 14px 0;
+            border-top: 1px solid rgba(239, 246, 242, 0.08);
+        }
+
+        .timeline-step:first-child {
+            border-top: 0;
+            padding-top: 2px;
+        }
+
+        .timeline-step span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(126, 214, 193, 0.12);
+        }
+
+        .timeline-step p {
+            padding-top: 4px;
+            line-height: 1.4;
+        }
+
+        .sdd-callout {
+            padding: 22px 24px;
+            border-color: rgba(255, 98, 0, 0.28);
+            background: linear-gradient(135deg, rgba(255, 98, 0, 0.14), rgba(92, 139, 214, 0.08));
+            box-shadow: 0 18px 40px rgba(255, 98, 0, 0.08);
+        }
+
+        .sdd-callout p {
+            margin: 0;
+            color: var(--text);
+            font-size: 1rem;
+            line-height: 1.48;
+        }
+
+        .sdd-callout p + p {
+            margin-top: 12px;
+        }
+
+        .fragment.pause-block.visible {
+            animation: pauseReveal 260ms ease both;
+        }
+
+        .fragment.fade-up-stagger.visible {
+            animation: fadeUp 520ms ease both;
+        }
+
+        .fragment.fade-left-soft.visible {
+            animation: fadeLeftSoft 480ms ease both;
+        }
+
+        .fragment.fade-right-soft.visible {
+            animation: fadeRightSoft 480ms ease both;
+        }
+
+        .fragment.callout-glow.visible {
+            animation: calloutGlow 520ms ease both;
+        }
+
+        @keyframes heroFade {
+            from {
+                opacity: 0;
+                transform: translateY(22px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pauseReveal {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeLeftSoft {
+            from {
+                opacity: 0;
+                transform: translateX(-22px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeRightSoft {
+            from {
+                opacity: 0;
+                transform: translateX(22px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes calloutGlow {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+                box-shadow: 0 0 0 rgba(255, 98, 0, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                box-shadow: 0 18px 40px rgba(255, 98, 0, 0.08);
+            }
+        }
+
+        @media (max-width: 1180px) {
+            .reveal .slides section {
+                padding: 24px 24px 30px;
+            }
+
+            .slide-shell {
+                padding: 24px;
+            }
+
+            .hero-grid,
+            .split-grid,
+            .motives-grid,
+            .levers-grid,
+            .team-grid,
+            .sdd-grid,
+            .menu-grid,
+            .comparison-board,
+            .compare-skills,
+            .metrics-highlight,
+            .metrics-grid,
+            .roadmap-cycle,
+            .roadmap-timeline,
+            .measurement-items {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title,
+            .hero-subtitle {
+                max-width: none;
+            }
+
+            .comparison-row {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+
+            .motive-card,
+            .lever-card,
+            .skill-card {
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+<a class="deck-menu-button" href="#menu" data-target="menu">Menu</a>
+<div class="reveal">
+    <div class="slides">
+        <section class="menu-slide" id="menu">
+            <div class="slide-shell">
+                <article class="content-panel center-intro">
+                    <p class="eyebrow">Navegação</p>
+                    <h1>Squads híbridas</h1>
+                    <p class="hero-subtitle">Modelo de trabalho Agentic AI</p>
+                    <p>Use este menu para navegar direto entre os temas da apresentação sem precisar percorrer todos os slides.</p>
+                </article>
+
+                <div class="menu-grid">
+                    <a class="menu-link" href="#criacao-squad" data-target="criacao-squad">
+                        <strong>Criação da Squad Híbrida</strong>
+                        <span>Contexto, motivos e alavancas estratégicas do modelo.</span>
+                    </a>
+                    <a class="menu-link" href="#contexto-modelo" data-target="contexto-modelo">
+                        <strong>Contexto</strong>
+                        <span>Por que esse formato passou a fazer sentido para produto e engenharia.</span>
+                    </a>
+                    <a class="menu-link" href="#motivos-criacao" data-target="motivos-criacao">
+                        <strong>Motivos da Criação</strong>
+                        <span>Pressões e ganhos esperados com a evolução da squad.</span>
+                    </a>
+                    <a class="menu-link" href="#alavancas-estrategicas" data-target="alavancas-estrategicas">
+                        <strong>Alavancas Estratégicas</strong>
+                        <span>Elementos que sustentam o modelo híbrido na prática.</span>
+                    </a>
+                    <a class="menu-link" href="#formacao-time" data-target="formacao-time">
+                        <strong>Formação do Time</strong>
+                        <span>Papéis evoluídos de PM AI-Driven e Engineers AI-Driven.</span>
+                    </a>
+                    <a class="menu-link" href="#comparacao-squads" data-target="comparacao-squads">
+                        <strong>Squad Híbrida vs Squad Convencional</strong>
+                        <span>Comparação direta entre o modelo linear e o modelo amplificado por IA.</span>
+                    </a>
+                    <a class="menu-link" href="#roadmap-implementacao" data-target="roadmap-implementacao">
+                        <strong>Roadmap e Plano de Implementação</strong>
+                        <span>Como a evolução acontece com SDD, releases e aprendizado contínuo.</span>
+                    </a>
+                    <a class="menu-link" href="#metricas-sucesso" data-target="metricas-sucesso">
+                        <strong>Métricas de Sucesso</strong>
+                        <span>Resultados práticos em velocidade, produtividade e eficiência.</span>
+                    </a>
+                    <a class="menu-link" href="#case-sdd" data-target="case-sdd">
+                        <strong>Case com SDD</strong>
+                        <span>Como especificação estruturada melhora precisão, velocidade e qualidade com IA.</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="criacao-squad">
+            <div class="slide-shell">
+                <div class="hero-panel">
+                    <div class="hero-grid">
+                        <div>
+                            <p class="eyebrow">Squads híbridas · Modelo de trabalho Agentic AI</p>
+                            <h1 class="hero-title">Criação da Squad Híbrida</h1>
+                            <p class="hero-subtitle">
+                                Um novo modelo de time para aumentar velocidade, autonomia e escala com apoio de IA.
+                            </p>
+                        </div>
+                        <aside class="hero-side">
+                            <strong>Contexto da mudança</strong>
+                            <p>
+                                Discovery, priorização e execução precisavam acontecer com mais fluidez em um cenário de maior
+                                complexidade e exigência de resposta.
+                            </p>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contexto-modelo">
+            <div class="slide-shell">
+                <div class="split-grid">
+                    <article class="content-panel">
+                        <p class="eyebrow">Contexto</p>
+                        <h2>Por que esse modelo passou a fazer sentido</h2>
+                        <p>
+                            A criação da squad híbrida nasceu da necessidade de responder mais rápido a desafios cada vez mais
+                            complexos, em um contexto onde discovery, priorização e execução precisavam acontecer com mais fluidez.
+                        </p>
+                    </article>
+                    <article class="content-panel fragment pause-block" data-fragment-index="1">
+                        <p class="eyebrow">Leitura executiva</p>
+                        <h2>Não era só sobre automatizar</h2>
+                        <p>
+                            O modelo tradicional de squad já não capturava todo o potencial trazido por ferramentas e práticas
+                            orientadas por inteligência artificial.
+                        </p>
+                        <p>
+                            Havia uma oportunidade clara de combinar repertório humano, visão de produto e capacidade técnica
+                            com aceleração AI-driven ao longo de todo o ciclo de desenvolvimento.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="motivos-criacao">
+            <div class="slide-shell">
+                <article class="content-panel">
+                    <p class="eyebrow">Motivos da criação</p>
+                    <h2>O que pressionou a evolução da squad</h2>
+                    <div class="motives-grid">
+                        <div class="motive-card fragment fade-in" data-fragment-index="1">
+                            <span class="card-number">01</span>
+                            <p>acelerar discovery e delivery sem comprometer qualidade</p>
+                        </div>
+                        <div class="motive-card fragment fade-in" data-fragment-index="2">
+                            <span class="card-number">02</span>
+                            <p>lidar melhor com maior complexidade na definição e execução de soluções</p>
+                        </div>
+                        <div class="motive-card fragment fade-in" data-fragment-index="3">
+                            <span class="card-number">03</span>
+                            <p>reduzir esforço operacional repetitivo com apoio de IA</p>
+                        </div>
+                        <div class="motive-card fragment fade-in" data-fragment-index="4">
+                            <span class="card-number">04</span>
+                            <p>tornar o time mais autônomo e escalável</p>
+                        </div>
+                        <div class="motive-card fragment fade-in" data-fragment-index="5">
+                            <span class="card-number">05</span>
+                            <p>adotar um modelo de trabalho mais aderente ao futuro do desenvolvimento de produtos</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="levers-slide" id="alavancas-estrategicas">
+            <div class="slide-shell">
+                <article class="content-panel">
+                    <p class="eyebrow">Alavancas estratégicas</p>
+                    <h2>Elementos que viabilizam esse modelo</h2>
+                    <div class="levers-grid">
+                        <div class="lever-card fragment fade-up-stagger" data-fragment-index="1">
+                            <p>Descomissionamento do Painel de Serviços</p>
+                        </div>
+                        <div class="lever-card fragment fade-up-stagger" data-fragment-index="2">
+                            <p>Canais assistidos não é prioridade das Squads de Value Stream</p>
+                        </div>
+                        <div class="lever-card fragment fade-up-stagger" data-fragment-index="3">
+                            <p>IA como aceleradora de raciocínio e execução</p>
+                        </div>
+                        <div class="lever-card fragment fade-up-stagger" data-fragment-index="4">
+                            <p>processos mais estruturados para transformar contexto em entrega</p>
+                        </div>
+                        <div class="lever-card fragment fade-up-stagger" data-fragment-index="5">
+                            <p>clareza de papéis entre visão humana e apoio automatizado</p>
+                        </div>
+                        <div class="lever-card fragment fade-up-stagger" data-fragment-index="6">
+                            <p>engenharia orientada a especificação e colaboração com IA</p>
+                        </div>
+                        <div class="lever-card fragment fade-up-stagger" data-fragment-index="7">
+                            <p>produto orientado a hipóteses, contexto e tomada de decisão assistida</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="team-slide" id="formacao-time">
+            <div class="slide-shell">
+                <article class="content-panel center-intro">
+                    <p class="eyebrow">Formação do Time</p>
+                    <h2>Formação do Time</h2>
+                    <p class="hero-subtitle">Papéis evoluídos para um modelo AI-driven</p>
+                    <p class="fragment pause-block" data-fragment-index="1">
+                        A formação da squad híbrida não é apenas uma reorganização de funções, mas uma evolução da forma como produto e engenharia operam.
+                    </p>
+                    <p class="fragment pause-block" data-fragment-index="2">
+                        Profissionais passam a trabalhar em colaboração contínua com IA, ampliando sua capacidade de análise, decisão e execução.
+                    </p>
+                    <div class="team-inline-callout fragment callout-glow" data-fragment-index="3">
+                        <p>Não se trata apenas de novos papéis, mas de profissionais amplificados por IA, capazes de decidir melhor e construir mais rápido.</p>
+                    </div>
+                </article>
+
+                <div class="team-grid">
+                    <article class="team-card fragment fade-left-soft" data-fragment-index="4">
+                        <p class="eyebrow">PM AI-Driven</p>
+                        <h3>Papel orientado a discovery, hipóteses e decisão</h3>
+                        <p>O PM AI-Driven utiliza IA para expandir sua capacidade de discovery, análise e tomada de decisão.</p>
+                        <div class="team-points">
+                            <div class="team-point fragment fade-in" data-fragment-index="5">
+                                <span>01</span>
+                                <p>estrutura problemas para consumo por IA</p>
+                            </div>
+                            <div class="team-point fragment fade-in" data-fragment-index="6">
+                                <span>02</span>
+                                <p>gera e refina hipóteses com apoio de modelos</p>
+                            </div>
+                            <div class="team-point fragment fade-in" data-fragment-index="7">
+                                <span>03</span>
+                                <p>acelera análises de contexto e cenários</p>
+                            </div>
+                            <div class="team-point fragment fade-in" data-fragment-index="8">
+                                <span>04</span>
+                                <p>cria especificações mais completas</p>
+                            </div>
+                            <div class="team-point fragment fade-in" data-fragment-index="9">
+                                <span>05</span>
+                                <p>reduz tempo entre insight e direcionamento</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="team-card fragment fade-right-soft" data-fragment-index="4">
+                        <p class="eyebrow">Engineers AI-Driven</p>
+                        <h3>Papel orientado a implementação, validação e qualidade</h3>
+                        <p>Os Engineers AI-Driven utilizam IA para acelerar e ampliar a construção de software.</p>
+                        <div class="team-points">
+                            <div class="team-point fragment fade-in" data-fragment-index="10">
+                                <span>01</span>
+                                <p>traduz especificações em instruções para IA</p>
+                            </div>
+                            <div class="team-point fragment fade-in" data-fragment-index="11">
+                                <span>02</span>
+                                <p>acelera desenvolvimento e testes</p>
+                            </div>
+                            <div class="team-point fragment fade-in" data-fragment-index="12">
+                                <span>03</span>
+                                <p>valida outputs gerados por IA</p>
+                            </div>
+                            <div class="team-point fragment fade-in" data-fragment-index="13">
+                                <span>04</span>
+                                <p>garante qualidade e segurança</p>
+                            </div>
+                            <div class="team-point fragment fade-in" data-fragment-index="14">
+                                <span>05</span>
+                                <p>conecta intenção de produto com implementação</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section class="compare-slide" id="comparacao-squads">
+            <div class="slide-shell">
+                <article class="content-panel center-intro">
+                    <p class="eyebrow">Squad Híbrida vs Squad Convencional</p>
+                    <h2>Squad Híbrida vs Squad Convencional</h2>
+                    <p class="hero-subtitle">Do modelo linear ao modelo amplificado por IA</p>
+                    <p>
+                        A squad híbrida representa uma mudança estrutural na forma de construir produtos,
+                        combinando capacidade humana com aceleração por IA.
+                    </p>
+                </article>
+
+                <div class="comparison-board">
+                    <article class="comparison-column fragment fade-left-soft" data-fragment-index="1">
+                        <p class="eyebrow">Squad Convencional</p>
+                        <h3>Modelo linear</h3>
+                        <div class="comparison-list">
+                            <div class="comparison-row fragment fade-in" data-fragment-index="2">
+                                <span class="comparison-label">Velocidade</span>
+                                <p>ciclos mais longos</p>
+                            </div>
+                            <div class="comparison-row fragment fade-in" data-fragment-index="3">
+                                <span class="comparison-label">Decisão</span>
+                                <p>análise limitada</p>
+                            </div>
+                            <div class="comparison-row fragment fade-in" data-fragment-index="4">
+                                <span class="comparison-label">Execução</span>
+                                <p>desenvolvimento manual</p>
+                            </div>
+                            <div class="comparison-row fragment fade-in" data-fragment-index="5">
+                                <span class="comparison-label">Autonomia</span>
+                                <p>dependência entre etapas</p>
+                            </div>
+                            <div class="comparison-row fragment fade-in" data-fragment-index="6">
+                                <span class="comparison-label">Escala</span>
+                                <p>crescimento linear</p>
+                            </div>
+                            <div class="comparison-row fragment fade-in" data-fragment-index="7">
+                                <span class="comparison-label">Qualidade</span>
+                                <p>validação posterior</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="comparison-column is-hybrid fragment fade-right-soft" data-fragment-index="1">
+                        <p class="eyebrow">Squad Híbrida</p>
+                        <h3>Modelo amplificado por IA</h3>
+                        <div class="comparison-list">
+                            <div class="comparison-row fragment fade-in" data-fragment-index="2">
+                                <span class="comparison-label">Velocidade</span>
+                                <p>ciclos acelerados com IA</p>
+                            </div>
+                            <div class="comparison-row fragment fade-in" data-fragment-index="3">
+                                <span class="comparison-label">Decisão</span>
+                                <p>análise ampliada por IA</p>
+                            </div>
+                            <div class="comparison-row fragment fade-in" data-fragment-index="4">
+                                <span class="comparison-label">Execução</span>
+                                <p>desenvolvimento assistido por IA</p>
+                            </div>
+                            <div class="comparison-row fragment fade-in" data-fragment-index="5">
+                                <span class="comparison-label">Autonomia</span>
+                                <p>maior autonomia com IA</p>
+                            </div>
+                            <div class="comparison-row fragment fade-in" data-fragment-index="6">
+                                <span class="comparison-label">Escala</span>
+                                <p>crescimento exponencial</p>
+                            </div>
+                            <div class="comparison-row fragment fade-in" data-fragment-index="7">
+                                <span class="comparison-label">Qualidade</span>
+                                <p>qualidade assistida desde o início</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <article class="content-panel">
+                    <p class="eyebrow">Skill de AI</p>
+                    <div class="compare-skills">
+                        <div class="skill-card fragment fade-up-stagger" data-fragment-index="8">
+                            <p>estruturar problemas</p>
+                        </div>
+                        <div class="skill-card fragment fade-up-stagger" data-fragment-index="9">
+                            <p>orientar IA com clareza</p>
+                        </div>
+                        <div class="skill-card fragment fade-up-stagger" data-fragment-index="10">
+                            <p>validar outputs</p>
+                        </div>
+                        <div class="skill-card fragment fade-up-stagger" data-fragment-index="11">
+                            <p>iterar rapidamente</p>
+                        </div>
+                        <div class="skill-card fragment fade-up-stagger" data-fragment-index="12">
+                            <p>combinar pensamento crítico com IA</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <section class="roadmap-slide" id="roadmap-implementacao">
+            <div class="slide-shell">
+                <article class="content-panel center-intro">
+                    <p class="eyebrow">Roadmap e Plano de Implementação</p>
+                    <h2>Roadmap e Plano de Implementação</h2>
+                    <p class="hero-subtitle">Da estruturação à escala com SDD</p>
+                </article>
+
+                <article class="content-panel">
+                    <p class="eyebrow">Ciclo SDD</p>
+                    <div class="roadmap-cycle">
+                        <div class="cycle-step fragment fade-up-stagger" data-fragment-index="1">
+                            <strong>Thin</strong>
+                            <p>refinamento do problema</p>
+                        </div>
+                        <div class="cycle-step fragment fade-up-stagger" data-fragment-index="2">
+                            <strong>Plan</strong>
+                            <p>definição da especificação</p>
+                        </div>
+                        <div class="cycle-step fragment fade-up-stagger" data-fragment-index="3">
+                            <strong>Build</strong>
+                            <p>construção com IA</p>
+                        </div>
+                        <div class="cycle-step fragment fade-up-stagger" data-fragment-index="4">
+                            <strong>Review</strong>
+                            <p>validação e melhoria</p>
+                        </div>
+                    </div>
+                </article>
+
+                <div class="roadmap-timeline">
+                    <article class="release-card fragment fade-left-soft" data-fragment-index="5">
+                        <div class="release-header">
+                            <span class="release-badge">Release 02</span>
+                            <h3>Fundação do modelo</h3>
+                            <p class="release-focus">Foco: Thin e Plan</p>
+                        </div>
+
+                        <div class="release-group">
+                            <strong>Ações</strong>
+                            <div class="release-actions">
+                                <div class="release-action fragment fade-in" data-fragment-index="6">
+                                    <span>•</span>
+                                    <p>desenvolvimento de skills de AI para PM</p>
+                                </div>
+                                <div class="release-action fragment fade-in" data-fragment-index="7">
+                                    <span>•</span>
+                                    <p>estruturação de problemas</p>
+                                </div>
+                                <div class="release-action fragment fade-in" data-fragment-index="8">
+                                    <span>•</span>
+                                    <p>educação do time em SDD</p>
+                                </div>
+                                <div class="release-action fragment fade-in" data-fragment-index="9">
+                                    <span>•</span>
+                                    <p>uso de IA em discovery e planejamento</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="release-group">
+                            <strong>Resultado</strong>
+                            <p class="release-result">melhor especificação e clareza</p>
+                        </div>
+                    </article>
+
+                    <article class="release-card is-next fragment fade-right-soft" data-fragment-index="10">
+                        <div class="release-header">
+                            <span class="release-badge">Release 03</span>
+                            <h3>Aceleração da entrega</h3>
+                            <p class="release-focus">Foco: Build e Review</p>
+                        </div>
+
+                        <div class="release-group">
+                            <strong>Ações</strong>
+                            <div class="release-actions">
+                                <div class="release-action fragment fade-in" data-fragment-index="11">
+                                    <span>•</span>
+                                    <p>desenvolvimento de skills de AI para Engineers</p>
+                                </div>
+                                <div class="release-action fragment fade-in" data-fragment-index="12">
+                                    <span>•</span>
+                                    <p>uso de IA na construção</p>
+                                </div>
+                                <div class="release-action fragment fade-in" data-fragment-index="13">
+                                    <span>•</span>
+                                    <p>revisão de código assistida por IA</p>
+                                </div>
+                                <div class="release-action fragment fade-in" data-fragment-index="14">
+                                    <span>•</span>
+                                    <p>melhoria contínua</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="release-group">
+                            <strong>Resultado</strong>
+                            <p class="release-result">maior velocidade com qualidade</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section class="metrics-slide" id="metricas-sucesso">
+            <div class="slide-shell">
+                <article class="content-panel center-intro">
+                    <p class="eyebrow">Métricas de Sucesso</p>
+                    <h2>Métricas de Sucesso</h2>
+                    <p class="hero-subtitle">Resultados práticos de um modelo AI-driven</p>
+                </article>
+
+                <div class="metrics-highlight">
+                    <article class="metric-number-card fragment callout-glow" data-fragment-index="1">
+                        <p class="metric-number">20h</p>
+                        <p class="metric-number-caption">destaque principal</p>
+                    </article>
+
+                    <article class="metric-case-card fragment fade-right-soft" data-fragment-index="2">
+                        <p class="eyebrow">Case</p>
+                        <h3>20 horas para transformar especificação em frontend completo</h3>
+                        <p>
+                            Desenvolvimento de frontend completo em aproximadamente 20 horas,
+                            atendendo todos os requisitos funcionais.
+                        </p>
+                        <p>
+                            para desenvolver um frontend completo com todas as especificações do cliente
+                        </p>
+                        <div class="metric-bullets">
+                            <div class="metric-bullet fragment fade-in" data-fragment-index="3">
+                                <span>•</span>
+                                <p>alta velocidade de execução</p>
+                            </div>
+                            <div class="metric-bullet fragment fade-in" data-fragment-index="4">
+                                <span>•</span>
+                                <p>transformação rápida de especificação em entrega</p>
+                            </div>
+                            <div class="metric-bullet fragment fade-in" data-fragment-index="5">
+                                <span>•</span>
+                                <p>redução do tempo entre definição e implementação</p>
+                            </div>
+                            <div class="metric-bullet fragment fade-in" data-fragment-index="6">
+                                <span>•</span>
+                                <p>manutenção de qualidade com apoio de IA</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <article class="content-panel">
+                    <p class="eyebrow">Indicadores</p>
+                    <div class="metrics-grid">
+                        <div class="metric-tile fragment fade-up-stagger" data-fragment-index="7">
+                            <strong>Velocidade</strong>
+                            <p>redução no tempo de entrega</p>
+                        </div>
+                        <div class="metric-tile fragment fade-up-stagger" data-fragment-index="8">
+                            <strong>Produtividade</strong>
+                            <p>mais entregas por profissional</p>
+                        </div>
+                        <div class="metric-tile fragment fade-up-stagger" data-fragment-index="9">
+                            <strong>Qualidade</strong>
+                            <p>menos retrabalho</p>
+                        </div>
+                        <div class="metric-tile fragment fade-up-stagger" data-fragment-index="10">
+                            <strong>Eficiência</strong>
+                            <p>menos esforço manual</p>
+                        </div>
+                        <div class="metric-tile fragment fade-up-stagger" data-fragment-index="11">
+                            <strong>Capacidade</strong>
+                            <p>maior volume de entrega por time</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="measurement-panel fragment callout-glow" data-fragment-index="12">
+                    <p class="eyebrow">Como vamos medir?</p>
+                    <div class="measurement-items">
+                        <div class="measurement-item fragment fade-in" data-fragment-index="13">
+                            <strong>Idea to value</strong>
+                            <p>tempo total entre a definição da necessidade e a entrega de valor em produção.</p>
+                        </div>
+                        <div class="measurement-item fragment fade-in" data-fragment-index="14">
+                            <strong>Tempo médio entre as GMUD's</strong>
+                            <p>cadência de mudanças liberadas para medir fluidez e frequência de entrega.</p>
+                        </div>
+                        <div class="measurement-item fragment fade-in" data-fragment-index="15">
+                            <strong>Qualidade das entregas</strong>
+                            <p>% de GMUDs com falha ou rollback e MTTR para medir estabilidade e recuperação.</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <section class="sdd-slide" id="case-sdd">
+            <div class="slide-shell">
+                <article class="content-panel center-intro">
+                    <p class="eyebrow">Case com SDD (Spec Driven Development)</p>
+                    <h2>Case com SDD (Spec Driven Development)</h2>
+                    <p class="hero-subtitle">Estruturando contexto para acelerar entrega com IA</p>
+                    <p>
+                        O Spec Driven Development organiza contexto, intenção e execução em um formato estruturado, permitindo colaboração eficiente entre humanos e IA.
+                    </p>
+                </article>
+
+                <div class="sdd-grid">
+                    <article class="sdd-definition">
+                        <p class="eyebrow">O que é SDD</p>
+                        <h3>Especificação como base da execução</h3>
+                        <div class="sdd-list">
+                            <div class="sdd-item fragment fade-in" data-fragment-index="1">
+                                <span>01</span>
+                                <p>define contexto do problema</p>
+                            </div>
+                            <div class="sdd-item fragment fade-in" data-fragment-index="2">
+                                <span>02</span>
+                                <p>explicita objetivos e hipóteses</p>
+                            </div>
+                            <div class="sdd-item fragment fade-in" data-fragment-index="3">
+                                <span>03</span>
+                                <p>detalha regras de negócio</p>
+                            </div>
+                            <div class="sdd-item fragment fade-in" data-fragment-index="4">
+                                <span>04</span>
+                                <p>estabelece critérios de aceitação</p>
+                            </div>
+                            <div class="sdd-item fragment fade-in" data-fragment-index="5">
+                                <span>05</span>
+                                <p>descreve comportamento esperado</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="sdd-application">
+                        <p class="eyebrow">Como aplicar</p>
+                        <h3>Fluxo prático com IA</h3>
+                        <div class="sdd-timeline">
+                            <div class="timeline-step fragment fade-up-stagger" data-fragment-index="6">
+                                <span>1</span>
+                                <p>estruturar o problema</p>
+                            </div>
+                            <div class="timeline-step fragment fade-up-stagger" data-fragment-index="7">
+                                <span>2</span>
+                                <p>definir especificação</p>
+                            </div>
+                            <div class="timeline-step fragment fade-up-stagger" data-fragment-index="8">
+                                <span>3</span>
+                                <p>usar como input para IA</p>
+                            </div>
+                            <div class="timeline-step fragment fade-up-stagger" data-fragment-index="9">
+                                <span>4</span>
+                                <p>validar e refinar outputs</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <article class="sdd-callout fragment callout-glow" data-fragment-index="10">
+                    <p class="eyebrow">Diferencial com IA</p>
+                    <p>
+                        maior precisão nos outputs, redução de ambiguidades, consistência nas entregas, reutilização de conhecimento e aumento de velocidade com qualidade.
+                    </p>
+                    <p>
+                        Sem especificação, a IA improvisa. Com SDD, a IA executa com precisão.
+                    </p>
+                </article>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script src="reveal/dist/reveal.js"></script>
+<script src="reveal/dist/plugin/notes.js"></script>
+<script>
+document.querySelectorAll("[data-target]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+        event.preventDefault();
+        const targetId = link.getAttribute("data-target");
+        if (!targetId) {
+            return;
+        }
+
+        const sections = Array.from(document.querySelectorAll(".slides > section"));
+        const slideIndex = sections.findIndex((section) => section.id === targetId);
+
+        if (slideIndex >= 0) {
+            Reveal.slide(slideIndex);
+        }
+    });
+});
+
+Reveal.initialize({
+    width: 1440,
+    height: 900,
+    hash: window.location.protocol !== "file:",
+    controls: true,
+    progress: true,
+    center: false,
+    margin: 0.04,
+    minScale: 0.2,
+    maxScale: 1.2,
+    transition: "slide",
+    plugins: [RevealNotes]
+});
+</script>
+</body>
+</html>

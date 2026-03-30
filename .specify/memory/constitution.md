@@ -1,22 +1,22 @@
 <!--
 Sync Impact Report:
-- Version change: 1.0.0 -> 1.1.0
+- Version change: 1.1.0 -> 1.2.0
 - Modified principles:
-  - Simplicidade -> Storytelling Enxuto
-  - Acessibilidade -> Acessibilidade Como Base
-  - Conteudo em Primeiro Lugar -> Conteudo Guiado por Narrativa
-- Added principles:
-  - Identidade Visual Reutilizavel
-  - Publicacao Estatica e Manutencao Leve
+  - Storytelling Enxuto -> Narrative First
+  - Conteudo Guiado por Narrativa -> Structured Story Flow
+  - Identidade Visual Reutilizavel -> Reusable Visual System
+  - Acessibilidade Como Base -> Accessibility and Readability by Default
+  - Publicacao Estatica e Manutencao Leve -> Static Delivery with Low Operational Friction
+- Added principles: None
 - Added sections:
-  - Experience Standards
-  - Content Workflow
+  - AI Collaboration Standards
 - Removed sections: None
 - Templates requiring updates:
   - ✅ reviewed only: .specify/templates/plan-template.md
   - ✅ reviewed only: .specify/templates/spec-template.md
   - ✅ reviewed only: .specify/templates/tasks-template.md
-  - ✅ updated: README.md
+  - ✅ reviewed only: README.md
+  - ✅ no command templates present: .specify/templates/commands/
 - Follow-up TODOs: None
 -->
 
@@ -24,84 +24,97 @@ Sync Impact Report:
 
 ## Core Principles
 
-### Storytelling Enxuto
-Cada pagina e cada slide MUST existir para reforcar uma mensagem principal.
-Texto longo, blocos densos e ornamentacao sem funcao MUST ser evitados.
-Rationale: apresentacoes eficazes dependem de compreensao rapida e progressao
-clara da narrativa.
+### Narrative First
+Every page, slide, and content block MUST reinforce a single primary message.
+Dense text, decorative UI without meaning, and structure that obscures the key
+point MUST be removed or simplified.
+Rationale: this repository exists to communicate ideas quickly and clearly in
+live talks, async sharing, and iterative content reviews.
 
-### Conteudo Guiado por Narrativa
-Cada palestra MUST nascer com uma estrutura identificavel: abertura, tensao ou
-contexto, desenvolvimento e fechamento. Placeholders de conteudo MUST deixar
-claro onde entram titulo, tese, exemplos, evidencias e chamada final.
-Rationale: o repositorio precisa ficar pronto para receber conteudo iterativo sem
-perder consistencia entre palestras.
+### Structured Story Flow
+Every presentation MUST follow a recognizable narrative arc: opening, context
+or tension, development, and closure. New sections MUST make their role in the
+story explicit so presenters can navigate by theme without losing coherence.
+Rationale: reusable decks only remain useful when the audience can understand
+where they are and why the next slide matters.
 
-### Identidade Visual Reutilizavel
-Home, decks e componentes compartilhados MUST usar tokens visuais coerentes de
-tipografia, espacamento, contraste e destaque. Variacoes por palestra MAY
-acontecer, desde que preservem a mesma familia visual e o mesmo padrao de
-navegacao.
-Rationale: o site deve transmitir marca pessoal consistente sem sacrificar a
-individualidade de cada tema.
+### Reusable Visual System
+Home, decks, and shared components MUST use coherent tokens for typography,
+spacing, contrast, navigation, and emphasis. Variations by topic MAY exist,
+but they MUST preserve the same family feel and interaction patterns.
+Rationale: the project should feel like one authored system, not a collection
+of unrelated files.
 
-### Acessibilidade Como Base
-Todo layout MUST manter contraste legivel, navegacao por teclado, estrutura
-semantica e comportamento responsivo em desktop e mobile. Slides MUST evitar
-depender somente de cor para comunicar hierarquia ou estado.
-Rationale: palestras precisam funcionar tanto ao vivo quanto no acesso posterior
-via GitHub Pages, em diferentes telas e contextos.
+### Accessibility and Readability by Default
+All screens MUST preserve semantic structure, keyboard-friendly navigation,
+strong contrast, responsive behavior, and readable content density across
+desktop and mobile. Slides MUST avoid hidden overflow that prevents access to
+meaningful content.
+Rationale: decks are consumed in different environments, including projection,
+laptops, and post-event browsing.
 
-### Publicacao Estatica e Manutencao Leve
-O projeto MUST permanecer compativel com hospedagem estatica no GitHub Pages,
-com assets locais, caminhos relativos e minimo de dependencias operacionais.
-Qualquer adicao tecnica SHOULD justificar claramente o ganho sobre a simplicidade
-de manutencao.
-Rationale: a velocidade de publicacao e a baixa friccao operacional sao parte do
-produto.
+### Static Delivery with Low Operational Friction
+The project MUST remain compatible with static hosting on GitHub Pages using
+local assets, relative paths, and minimal operational dependencies. Additional
+technical complexity SHOULD only be introduced when it materially improves the
+authoring or presentation experience.
+Rationale: fast publishing and low maintenance are part of the product value.
 
 ## Experience Standards
 
-O site MUST apresentar claramente quem e Michell, quais palestras estao
-disponiveis e como iniciar cada apresentacao. A home SHOULD funcionar como um
-catalogo editorial, nao apenas como uma lista de links. Os decks MUST compartilhar
-elementos recorrentes de abertura, divisao de secoes e encerramento para reduzir
-o custo de criar novas apresentacoes.
+The home page MUST behave as an editorial catalog, not just a link list.
+Presentations MUST provide clear orientation, including direct access to major
+themes when the deck grows beyond a few slides. Shared patterns such as cover
+slides, section intros, navigation affordances, and executive summary blocks
+SHOULD remain consistent across decks unless a stronger storytelling reason
+requires deviation.
+
+## AI Collaboration Standards
+
+When AI is used to create or revise presentations, prompts, specs, and edits
+MUST preserve the human intent of the talk and improve clarity rather than add
+volume. AI-generated content MUST be reviewed for narrative fit, visual
+coherence, and presenter usability before being accepted. Specifications for
+new sections SHOULD capture purpose, audience value, layout expectations,
+animation intent, and responsiveness requirements.
 
 ## Content Workflow
 
-Novas palestras SHOULD ser criadas a partir de uma estrutura reutilizavel.
-Conteudos em rascunho MUST ser marcados de forma explicita para distinguir
-template de material final. Mudancas de narrativa, layout ou identidade visual
-MUST considerar impacto simultaneo na home e nos decks existentes.
+New talks SHOULD start from reusable structure and explicit section goals.
+Draft content MUST be distinguishable from final narrative. Updates to shared
+visual language, deck navigation, or editorial framing MUST consider impact on
+the home page and existing presentations.
 
-## Tecnologias Utilizadas
+## Technologies Utilized
 
-O projeto usa HTML, CSS e JavaScript estaticos com Reveal.js para os decks.
-Hospedagem e distribuicao acontecem via GitHub Pages, sem etapa obrigatoria de
-build.
+The project uses static HTML, CSS, and JavaScript, with Reveal.js powering the
+presentation decks. Hosting and distribution happen through GitHub Pages
+without a required build pipeline.
 
-## Processo de Desenvolvimento
+## Development Process
 
-Mudancas MUST priorizar edicao direta dos arquivos estaticos do repositorio.
-Antes de publicar, toda entrega SHOULD verificar:
+Changes MUST prioritize direct edits to the static repository files. Before
+publishing, every meaningful change SHOULD verify:
 
-- consistencia visual entre home e decks
-- legibilidade em viewport desktop e mobile
-- navegacao e links principais funcionando
-- placeholders claramente identificados quando o conteudo final ainda nao existir
+- narrative clarity for the changed deck or page
+- visual consistency across home and presentations
+- navigation paths and menu shortcuts working as expected
+- responsive behavior and readable content density
+- no critical content hidden by overflow, viewport limits, or animation timing
+- placeholders clearly marked when final content is not yet available
 
 ## Governance
 
-Esta constituicao prevalece sobre preferencias locais de implementacao. Toda
-alteracao MUST registrar impacto na experiencia, manutencao estatica e fluxo de
-conteudo. Versionamento segue semver:
+This constitution overrides local preferences for presentation structure,
+navigation, and shared visual behavior. Any amendment MUST document its impact
+on storytelling, maintainability, static delivery, and AI-assisted workflow.
+Versioning follows semver:
 
-- MAJOR: remocao ou redefinicao incompatível de principios
-- MINOR: novo principio, nova secao normativa ou expansao material de regras
-- PATCH: esclarecimentos, redacao e ajustes nao normativos
+- MAJOR: incompatible redefinition or removal of a governing principle
+- MINOR: new normative guidance or material expansion of existing rules
+- PATCH: clarification, wording, or non-semantic cleanup
 
-Revisoes de conformidade MUST acontecer sempre que layout compartilhado,
-estrutura de decks ou fluxo editorial forem alterados.
+Compliance reviews MUST happen whenever shared layout behavior, deck navigation,
+content workflow, or AI authoring expectations are materially changed.
 
-**Version**: 1.1.0 | **Ratified**: 2026-03-27 | **Last Amended**: 2026-03-27
+**Version**: 1.2.0 | **Ratified**: 2026-03-27 | **Last Amended**: 2026-03-30
